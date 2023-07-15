@@ -1,0 +1,7 @@
+{
+   "name": "graphql-demo",
+   "workspaces": [
+      "server",
+      "client"
+   ]
+}

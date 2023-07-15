@@ -1,0 +1,17 @@
+{
+   "name": "server",
+   "scripts": {
+      "start": "tsc-watch --onSuccess \"node ./dist\""
+   },
+   "dependencies": {
+      "@apollo/server": "^4.7.5",
+      "graphql": "^16.7.1"
+   },
+   "devDependencies": {
+      "@graphql-tools/utils": "^10.0.3",
+      "concurrently": "^8.2.0",
+      "tsc": "^2.0.4",
+      "tsc-watch": "^6.0.4",
+      "typescript": "^5.1.6"
+   }
+}
