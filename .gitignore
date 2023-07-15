@@ -2,3 +2,4 @@ node_modules/
 .cache/
 client/public
 client/src/gatsby-types.d.ts
+dist/
