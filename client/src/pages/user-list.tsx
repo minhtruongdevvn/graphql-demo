@@ -1,4 +1,4 @@
-import { gql, useLazyQuery, useMutation, useQuery } from "@apollo/client";
+import { gql, useLazyQuery, useMutation } from "@apollo/client";
 import React, { createRef, useEffect, useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 
@@ -47,15 +47,18 @@ const UserList: React.FC = () => {
       deleteUser,
       { loading: deleteUserLoading, called: deleteUserCalled, reset },
    ] = useMutation(DELETE_USER_MUTATION);
-   const { data: userData, refetch: refetchUser } = useQuery(QUERY_ALL_USER, {
-      notifyOnNetworkStatusChange: true, // ensure loading value up to date
-   });
-   const { data: movieData } = useQuery(QUERY_ALL_MOVIES);
-   const [fetchMovie, { data: fetchMovieData, error: fetchMovieError }] =
-      useLazyQuery(QUERY_A_MOVIE);
+   const [queryUsers, { data: userData, refetch: refetchUser }] =
+      useLazyQuery(QUERY_ALL_USER);
+   const [queryMovies, { data: movieData }] = useLazyQuery(QUERY_ALL_MOVIES);
+   const [fetchMovie, { data: fetchMovieData }] = useLazyQuery(QUERY_A_MOVIE);
    const movieSearchRef = createRef<HTMLInputElement>();
    const users = userData?.users;
    const [movies, setMovies] = useState<Array<any>>([]);
+
+   useEffect(() => {
+      queryUsers();
+      queryMovies();
+   }, []);
 
    useEffect(() => {
       movieData?.movies && setMovies(movieData.movies);

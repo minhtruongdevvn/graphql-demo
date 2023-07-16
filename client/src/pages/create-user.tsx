@@ -1,5 +1,5 @@
 import { gql, useMutation } from "@apollo/client";
-import React, { CSSProperties, useState } from "react";
+import React, { CSSProperties, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
 const CREATE_USER_MUTATION = gql`
@@ -26,7 +26,15 @@ const CreateUser: React.FC = () => {
    const [age, setAge] = useState("");
    const [nationality, setNationality] = useState("");
 
-   const [createUser] = useMutation(CREATE_USER_MUTATION);
+   const [createUser, { called, loading, reset }] =
+      useMutation(CREATE_USER_MUTATION);
+
+   useEffect(() => {
+      if (called && !loading) {
+         navigate(-1);
+         reset();
+      }
+   }, [called, loading]);
 
    return (
       <div>

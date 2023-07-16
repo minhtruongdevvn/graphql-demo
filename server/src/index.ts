@@ -1,11 +1,22 @@
 import { ApolloServer } from "@apollo/server";
 import { startStandaloneServer } from "@apollo/server/standalone";
+import { resolvers } from "./resolvers";
+import { appTypeNode } from "./type-defs";
 
-import { resolvers } from "./schema/resolver";
-import { typeDefs } from "./schema/type-def";
+async function main() {
+   const server = new ApolloServer({
+      typeDefs: appTypeNode,
+      resolvers,
+   });
 
-const server = new ApolloServer({ typeDefs, resolvers });
+   const { url } = await startStandaloneServer(server, {
+      context: async ({ req, res }) => {
+         // context is used to pass variable to resolver
+         return req;
+      },
+   });
 
-startStandaloneServer(server, {}).then(({ url }) => {
    console.log(`🚀  Server ready at: ${url}`);
-});
+}
+
+void main();

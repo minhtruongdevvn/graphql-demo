@@ -5,10 +5,15 @@
    },
    "dependencies": {
       "@apollo/server": "^4.7.5",
-      "graphql": "^16.7.1"
+      "@graphql-tools/graphql-file-loader": "^8.0.0",
+      "@graphql-tools/load": "^8.0.0",
+      "@graphql-tools/load-files": "^7.0.0",
+      "graphql": "^16.7.1",
+      "graphql-tag": "^2.12.6"
    },
    "devDependencies": {
       "@graphql-tools/utils": "^10.0.3",
+      "@playlyfe/gql": "^2.6.2",
       "concurrently": "^8.2.0",
       "tsc": "^2.0.4",
       "tsc-watch": "^6.0.4",
